@@ -14,7 +14,8 @@ export default function CadastroUsuario() {
             id: 0,
             nome: '',
             usuario: '',
-            senha: ''
+            senha: '',
+            foto: ''
         })
 
     const [userResult, setUserResult] = useState<User>(
@@ -22,12 +23,14 @@ export default function CadastroUsuario() {
             id: 0,
             nome: '',
             usuario: '',
-            senha: ''
+            senha: '',
+            foto: ''
         })
 
     useEffect(() => {
         if (userResult.id != 0) {
             navigate("/login")
+            console.log(userResult)
         }
     }, [userResult]) 
 
@@ -61,10 +64,17 @@ export default function CadastroUsuario() {
                 <Box paddingX={10}>
                     <form onSubmit={onSubmit}>
                         <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className='textos2'>Cadastrar</Typography>
+
                         <TextField value={user.nome} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='nome' label="Nome" variant='outlined' name='nome' margin='normal' fullWidth />
+
                         <TextField value={user.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='usuario' label="Usuário" variant='outlined' name='usuario' margin='normal' fullWidth />
+
+                        <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='foto' label="Link da foto" variant='outlined' name='foto' margin='normal' fullWidth />
+
                         <TextField value={user.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label="Senha" variant='outlined' name='senha' margin='normal' fullWidth type='password'/>
+
                         <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id='confirmarSenha' label="Confirmar senha" variant='outlined' name='confirmarSenha' margin='normal' fullWidth type='password' />
+
                         <Box marginTop={2} textAlign='center'>
                             <Link to='/login' className='text-decoration-none'>
                                 <Button variant='contained' color='secondary' className='btnCancelar' >
