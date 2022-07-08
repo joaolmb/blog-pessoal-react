@@ -3,16 +3,19 @@ import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem,
 import './CadastroPost.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import Tema from '../../../models/Tema';
-import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { buscar, buscarId, post, put } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokenReducer';
+import { useSelector } from 'react-redux';
 
 function CadastroPost() {
 
     let navigate = useNavigate();
     const {id} = useParams<{id: string}> ();
     const [temas, setTemas] =useState<Tema[]>([])
-    const [token, setToken] =useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]> (
+        (state) => state.token
+    );
 
     useEffect(() => {
         if(token === "") {
