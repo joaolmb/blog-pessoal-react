@@ -7,6 +7,7 @@ import Tema from '../../../models/Tema';
 import { buscar } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokenReducer';
+import { toast } from 'react-toastify';
 
 export default function ListaTema() {
 
@@ -18,7 +19,16 @@ export default function ListaTema() {
 
   useEffect(() => {
     if (token == '') {
-      alert('Hoje não')
+      toast.error('Você precisa estar logado', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+    })
       navigate('/login')
     }
   }, [token])
